@@ -17,8 +17,6 @@ def part2(wordMap):
     for i in range(1,len(wordMap)-1):
         for j in range(1, len(wordMap[i])-1):
             if wordMap[i][j] == 'A': 
-                try: print(wordMap[i+1][j+1])
-                except: print(j)
                 if (
                     (
                         (wordMap[i-1][j-1] == 'M' and wordMap[i+1][j+1] == 'S') or 
@@ -29,7 +27,6 @@ def part2(wordMap):
                          (wordMap[i-1][j+1] == 'S' and wordMap[i+1][j-1] == 'M')
                     )
                 ):
-                    print(i,j)
                     count += 1
     print(count)
         
@@ -93,7 +90,6 @@ def countMatches(stringList, searchTerm):
     count = 0
     for string in stringList:
         count += len(findall(searchTerm,string))
-    print(stringList, count)
     return count
 
 
