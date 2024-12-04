@@ -3,7 +3,7 @@ from re import findall
 def main():
     wordMap = serializeInput('day04/input.txt')
     part1(wordMap)
-    part2()
+    part2(wordMap)
 
 def part1(wordMap):
     allStrings = generateSubStrings(wordMap)
@@ -12,12 +12,29 @@ def part1(wordMap):
             found += countMatches(direction, 'XMAS')
     print(found)
 
-def part2():
-    pass
+def part2(wordMap):
+    count =0
+    for i in range(1,len(wordMap)-1):
+        for j in range(1, len(wordMap[i])-1):
+            if wordMap[i][j] == 'A': 
+                try: print(wordMap[i+1][j+1])
+                except: print(j)
+                if (
+                    (
+                        (wordMap[i-1][j-1] == 'M' and wordMap[i+1][j+1] == 'S') or 
+                        (wordMap[i-1][j-1] == 'S' and wordMap[i+1][j+1] == 'M')
+                    ) and
+                    ( 
+                         (wordMap[i-1][j+1] == 'M' and wordMap[i+1][j-1] == 'S') or 
+                         (wordMap[i-1][j+1] == 'S' and wordMap[i+1][j-1] == 'M')
+                    )
+                ):
+                    print(i,j)
+                    count += 1
+    print(count)
         
 
 def serializeInput(textfile):
-    returnList = []
     with open(textfile) as inputFile:
         return [line for line in inputFile]
 
@@ -78,8 +95,6 @@ def countMatches(stringList, searchTerm):
         count += len(findall(searchTerm,string))
     print(stringList, count)
     return count
-    
-     
 
 
 if __name__ == '__main__':
